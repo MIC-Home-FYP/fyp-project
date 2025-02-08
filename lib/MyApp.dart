@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'CareSync',
+        title: 'MediHeal',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          scaffoldBackgroundColor: Color(0xFF6290C3),
         ),
         home: MyHomePage(),
       ),

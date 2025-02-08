@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'MyAppState.dart';
 import 'NurseLogin.dart';
 import 'PatientLogin.dart';
@@ -14,29 +18,57 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('CareSync',
-            style: TextStyle(
-              fontSize: 60,
-            ),
+            Image(
+              image: AssetImage('assets/images/Logo.png'),
+              width: 195,
+              height: 195,
+            ), 
+            SizedBox(
+              height: 30,
+            ), 
+            Text('MediHeal',
+            style: GoogleFonts.nunito(
+              color: Colors.white, 
+              fontSize: 28,
+              fontWeight: FontWeight.w700,
+              ), 
             textAlign: TextAlign.center,
             ),
-            Text('Your MIC@Home personal assistant', 
+            Text('recovery made simpler!', 
+              style: GoogleFonts.nunito(
+                color: Colors.white, 
+                fontSize: 24, 
+                fontWeight: FontWeight.w200,
+              ),
             textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: 100
+              height: 140
             ),
             Padding(
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.all(10),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context, 
                     MaterialPageRoute(builder: (context) => const NurseLogin()));
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFF0F7EE),
+                  fixedSize: Size.fromWidth(180),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                  ),
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8, top: 8, left: 50, right: 50),
-                  child: Text('I\'m a Nurse'),
+                  padding: const EdgeInsets.only(bottom: 13, top: 13),
+                  child: Text('Log In', 
+                    style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontSize: 19,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               )
             ),
@@ -48,12 +80,28 @@ class MyHomePage extends StatelessWidget {
                     context, 
                     MaterialPageRoute(builder: (context) => PatientLogin()));
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFF0F7EE),
+                  fixedSize: Size.fromWidth(180),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                  ),
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8, top: 8, left: 50, right: 50),
-                  child: Text('I\'m a Patient'),
+                  padding: const EdgeInsets.only(bottom: 13, top: 13),
+                  child: Text('Sign Up', 
+                    style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontSize: 19,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               )
-            )
+            ),
+            SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
