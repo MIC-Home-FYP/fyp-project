@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'MyAppState.dart';
-import 'NurseLogin.dart';
+import 'PatientSignup.dart';
 import 'PatientLogin.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -51,7 +51,7 @@ class MyHomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context, 
-                    MaterialPageRoute(builder: (context) => const NurseLogin()));
+                    MaterialPageRoute(builder: (context) => const PatientLogin()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFFF0F7EE),
@@ -78,7 +78,7 @@ class MyHomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context, 
-                    MaterialPageRoute(builder: (context) => PatientLogin()));
+                    MaterialPageRoute(builder: (context) => PatientSignup()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFFF0F7EE),
