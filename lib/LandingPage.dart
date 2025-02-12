@@ -8,7 +8,7 @@ import 'MyAppState.dart';
 import 'PatientSignup.dart';
 import 'PatientLogin.dart';
 
-class MyHomePage extends StatelessWidget {
+class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();

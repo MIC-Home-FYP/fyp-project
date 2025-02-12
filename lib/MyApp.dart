@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'MyHomePage.dart';
+import 'LandingPage.dart';
 import 'MyAppState.dart';
 
 class MyApp extends StatelessWidget {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           scaffoldBackgroundColor: Color(0xFF6290C3),
         ),
-        home: MyHomePage(),
+        home: LandingPage(),
       ),
     );
   }
