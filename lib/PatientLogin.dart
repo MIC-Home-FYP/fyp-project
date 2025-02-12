@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
+
 class PatientLogin extends StatelessWidget {
   const PatientLogin({super.key});
+  static String username = "";
+  static String passwordHash = "";
   
   @override
   Widget build(BuildContext context) {
@@ -60,14 +65,22 @@ class PatientLogin extends StatelessWidget {
                       ),
                     ),
                     TextField(
+                      onSubmitted: (String value) {
+                        username = value;
+                      },
+                      style: GoogleFonts.nunito(
+                        color: Colors.white,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w100,
+                      ),
                       decoration: InputDecoration(
                         filled: true, 
                         fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                         ), 
-                        labelText: "Type here...",
-                        labelStyle: GoogleFonts.nunito(
+                        hintText: "Type here...",
+                        hintStyle: GoogleFonts.nunito(
                           color: Colors.white,
                           fontSize: 21,
                           fontWeight: FontWeight.w100,
@@ -87,14 +100,23 @@ class PatientLogin extends StatelessWidget {
                       ),
                     ),
                     TextField(
+                      onSubmitted: (String value) {
+                        passwordHash = sha256.convert(utf8.encode(value)).toString();
+                      },
+                      style: GoogleFonts.nunito(
+                        color: Colors.white,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w100,
+                      ),
+                      obscureText: true,
                       decoration: InputDecoration(
                         filled: true, 
                         fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
                         ), 
-                        labelText: "Type here...",
-                        labelStyle: GoogleFonts.nunito(
+                        hintText: "Type here...",
+                        hintStyle: GoogleFonts.nunito(
                           color: Colors.white,
                           fontSize: 21,
                           fontWeight: FontWeight.w100,
@@ -110,7 +132,8 @@ class PatientLogin extends StatelessWidget {
               padding: EdgeInsets.all(10),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    print(username);
+                    print(passwordHash);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFF0F7EE),
