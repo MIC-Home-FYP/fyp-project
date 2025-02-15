@@ -36,155 +36,157 @@ class PatientSignup extends StatelessWidget {
               Container(
                 width: 340,
                 alignment: Alignment.centerLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                      child: Text("Patient ID", 
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                        child: Text("Patient ID", 
+                          style: GoogleFonts.nunito(
+                            color: Colors.white, 
+                            fontSize: 21,
+                            fontWeight: FontWeight.w300, 
+                          ),
+                        ),
+                      ),
+                      TextField(
+                        onSubmitted: (String value) {
+                          username = value;
+                        },
                         style: GoogleFonts.nunito(
-                          color: Colors.white, 
-                          fontSize: 21,
-                          fontWeight: FontWeight.w300, 
-                        ),
-                      ),
-                    ),
-                    TextField(
-                      onSubmitted: (String value) {
-                        username = value;
-                      },
-                      style: GoogleFonts.nunito(
-                        color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w100,
-                      ),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                        filled: true, 
-                        fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ), 
-                        hintText: "Type here...",
-                        hintStyle: GoogleFonts.nunito(
                           color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w100,
-                          fontStyle: FontStyle.italic,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w100,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                          filled: true, 
+                          fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ), 
+                          hintText: "Type here...",
+                          hintStyle: GoogleFonts.nunito(
+                            color: Colors.white,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w100,
+                            fontStyle: FontStyle.italic,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 15),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                      child: Text("Password", 
+                      SizedBox(height: 15),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                        child: Text("Password", 
+                          style: GoogleFonts.nunito(
+                            color: Colors.white, 
+                            fontSize: 21,
+                            fontWeight: FontWeight.w300, 
+                          ),
+                        ),
+                      ),
+                      TextField(
+                        onSubmitted: (String value) {
+                          passwordHash = sha256.convert(utf8.encode(value)).toString();
+                        },
                         style: GoogleFonts.nunito(
-                          color: Colors.white, 
-                          fontSize: 21,
-                          fontWeight: FontWeight.w300, 
-                        ),
-                      ),
-                    ),
-                    TextField(
-                      onSubmitted: (String value) {
-                        passwordHash = sha256.convert(utf8.encode(value)).toString();
-                      },
-                      style: GoogleFonts.nunito(
-                        color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w100,
-                      ),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                        filled: true, 
-                        fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ), 
-                        hintText: "Type here...",
-                        hintStyle: GoogleFonts.nunito(
                           color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w100,
-                          fontStyle: FontStyle.italic,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w100,
+                        ),
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                          filled: true, 
+                          fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ), 
+                          hintText: "Type here...",
+                          hintStyle: GoogleFonts.nunito(
+                            color: Colors.white,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w100,
+                            fontStyle: FontStyle.italic,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 15),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                      child: Text("Confirm Password", 
+                      SizedBox(height: 15),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                        child: Text("Confirm Password", 
+                          style: GoogleFonts.nunito(
+                            color: Colors.white, 
+                            fontSize: 21,
+                            fontWeight: FontWeight.w300, 
+                          ),
+                        ),
+                      ),
+                      TextField(
+                        onSubmitted: (String value) {
+                          confirmPasswordHash = sha256.convert(utf8.encode(value)).toString();
+                        },
                         style: GoogleFonts.nunito(
-                          color: Colors.white, 
-                          fontSize: 21,
-                          fontWeight: FontWeight.w300, 
-                        ),
-                      ),
-                    ),
-                    TextField(
-                      onSubmitted: (String value) {
-                        confirmPasswordHash = sha256.convert(utf8.encode(value)).toString();
-                      },
-                      style: GoogleFonts.nunito(
-                        color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w100,
-                      ),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                        filled: true, 
-                        fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ), 
-                        hintText: "Type here...",
-                        hintStyle: GoogleFonts.nunito(
                           color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w100,
-                          fontStyle: FontStyle.italic,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w100,
+                        ),
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                          filled: true, 
+                          fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ), 
+                          hintText: "Type here...",
+                          hintStyle: GoogleFonts.nunito(
+                            color: Colors.white,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w100,
+                            fontStyle: FontStyle.italic,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 15),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                      child: Text("Patient ID", 
+                      SizedBox(height: 15),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                        child: Text("Patient ID", 
+                          style: GoogleFonts.nunito(
+                            color: Colors.white, 
+                            fontSize: 21,
+                            fontWeight: FontWeight.w300, 
+                          ),
+                        ),
+                      ),
+                      TextField(
+                        onSubmitted: (String value) {
+                          username = value;
+                        },
                         style: GoogleFonts.nunito(
-                          color: Colors.white, 
-                          fontSize: 21,
-                          fontWeight: FontWeight.w300, 
-                        ),
-                      ),
-                    ),
-                    TextField(
-                      onSubmitted: (String value) {
-                        username = value;
-                      },
-                      style: GoogleFonts.nunito(
-                        color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w100,
-                      ),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                        filled: true, 
-                        fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ), 
-                        hintText: "Type here...",
-                        hintStyle: GoogleFonts.nunito(
                           color: Colors.white,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w100,
-                          fontStyle: FontStyle.italic,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w100,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                          filled: true, 
+                          fillColor: Color.fromARGB(51, 0xF0, 0xF7, 0xEE),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ), 
+                          hintText: "Type here...",
+                          hintStyle: GoogleFonts.nunito(
+                            color: Colors.white,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w100,
+                            fontStyle: FontStyle.italic,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 25),
@@ -194,6 +196,7 @@ class PatientSignup extends StatelessWidget {
                   onPressed: () {
                     print(username);
                     print(passwordHash);
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFF0F7EE),
