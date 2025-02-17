@@ -134,8 +134,6 @@ class PatientLogin extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                   child: ElevatedButton(
                     onPressed: () {
-                      print(username);
-                      print(passwordHash);
                       Navigator.push(
                         context, 
                         MaterialPageRoute(builder: (context) => PageNavigator()),

@@ -22,21 +22,21 @@ class PatientSignup extends StatelessWidget {
             ),
         ),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Sign up", 
-                style: GoogleFonts.nunito(
-                  color: Colors.white,
-                  fontSize: 42, 
-                  fontWeight: FontWeight.w500,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Sign up", 
+                  style: GoogleFonts.nunito(
+                    color: Colors.white,
+                    fontSize: 42, 
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              SizedBox(height: 150), 
-              Container(
-                width: 340,
-                alignment: Alignment.centerLeft,
-                child: SingleChildScrollView(
+                SizedBox(height: 150), 
+                Container(
+                  width: 340,
+                  alignment: Alignment.centerLeft,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -188,37 +188,37 @@ class PatientSignup extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-              SizedBox(height: 25),
-              Padding(
-              padding: EdgeInsets.all(10),
-                child: ElevatedButton(
-                  onPressed: () {
-                    print(username);
-                    print(passwordHash);
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFF0F7EE),
-                    fixedSize: Size.fromWidth(180),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(24)),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 13, top: 13),
-                    child: Text('Sign Up', 
-                      style: GoogleFonts.roboto(
-                        color: Colors.black,
-                        fontSize: 19,
-                        fontWeight: FontWeight.w700,
+                SizedBox(height: 25),
+                Padding(
+                padding: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      print(username);
+                      print(passwordHash);
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFF0F7EE),
+                      fixedSize: Size.fromWidth(180),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
                       ),
                     ),
-                  ),
-                )
-              ),
-              SizedBox(height: 40),
-            ],
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 13, top: 13),
+                      child: Text('Sign Up', 
+                        style: GoogleFonts.roboto(
+                          color: Colors.black,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  )
+                ),
+                SizedBox(height: 40),
+              ],
+            ),
           ),
         ),
       ),

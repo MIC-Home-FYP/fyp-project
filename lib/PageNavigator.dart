@@ -6,7 +6,6 @@ import 'package:fyp_project/ChatPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PageNavigator extends StatefulWidget {
-  static String patientName = "Candice Ng";
 
   @override
   State<PageNavigator> createState() => _PageNavigatorState();
