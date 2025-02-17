@@ -14,6 +14,7 @@ class LandingPage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
 
     return Scaffold(
+      backgroundColor: Color(0xFF6290C3),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

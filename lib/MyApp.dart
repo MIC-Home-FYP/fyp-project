@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
         title: 'MediHeal',
         theme: ThemeData(
           useMaterial3: true,
-          scaffoldBackgroundColor: Color(0xFF6290C3),
         ),
         home: LandingPage(),
       ),
