@@ -195,7 +195,7 @@ class HomePage extends StatelessWidget {
                                         color: Color(0xFF6290C3),
                                         borderRadius: BorderRadius.all(Radius.circular(7)),
                                       ),
-                                      child: Icon(Icons.medication_outlined, 
+                                      child: Icon(Icons.monitor_heart_outlined, 
                                         color: Color(0xFF2F3061),
                                         size: 35,
                                       ),
@@ -238,12 +238,280 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(height: 20),
                     Container(
-                      height: 156,
-                      width: 328,
+                      alignment: Alignment.topLeft,
+                      width: 370,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('My Vital Signs'),
+                          Text('My Vital Signs', 
+                            style: GoogleFonts.nunito(
+                              color: Color(0xFF2F3061),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Text('Last Measured at: 27-Nov-2024 22:30', 
+                            style: GoogleFonts.nunito(
+                              color: Color(0xFF6290C3),
+                              fontSize: 13,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
+                                  child: Container(
+                                    width: 105,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Color(0xFF779FCA),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.monitor_heart, color: Colors.white, size: 20,),
+                                          SizedBox(height: 10,),
+                                          Text('Heart Rate', 
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11,
+                                              fontStyle: FontStyle.italic,
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                          Text(
+                                            '$heartRate bpm',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w800,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Below average',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 11,
+                                            fontStyle: FontStyle.italic,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
+                                  child: Container(
+                                    width: 105,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Color(0xFF779FCA),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.device_thermostat, color: Colors.white, size: 20,),
+                                          SizedBox(height: 10,),
+                                          Text('Temperature', 
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11,
+                                              fontStyle: FontStyle.italic,
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                          Text(
+                                            '$temperature °C',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w800,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Good',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 11,
+                                            fontStyle: FontStyle.italic,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
+                                  child: Container(
+                                    width: 105,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Color(0xFF779FCA),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.device_thermostat, color: Colors.white, size: 20,),
+                                          SizedBox(height: 10,),
+                                          Text('Blood Pressure', 
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11,
+                                              fontStyle: FontStyle.italic,
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                          Text(
+                                            '$sysBP/$diasBP mmHg',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w800,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Above average',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 11,
+                                            fontStyle: FontStyle.italic,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
+                                  child: Container(
+                                    width: 105,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Color(0xFF779FCA),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.device_thermostat, color: Colors.white, size: 20,),
+                                          SizedBox(height: 10,),
+                                          Text('Blood Glucose', 
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11,
+                                              fontStyle: FontStyle.italic,
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                          Text(
+                                            '$bloodGlucose mmol/L',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w800,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Above average',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 11,
+                                            fontStyle: FontStyle.italic,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
+                                  child: Container(
+                                    width: 105,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Color(0xFF779FCA),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.device_thermostat, color: Colors.white, size: 20,),
+                                          SizedBox(height: 10,),
+                                          Text('Oxygen Level', 
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11,
+                                              fontStyle: FontStyle.italic,
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                          Text(
+                                            '$o2Level %',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w800,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Good',
+                                            style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 11,
+                                            fontStyle: FontStyle.italic,
+                                            fontFamily: 'Nunito',
+                                            fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
