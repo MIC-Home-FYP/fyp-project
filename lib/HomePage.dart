@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fyp_project/ChatPage.dart';
-import 'package:fyp_project/PageNavigator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static String patientName = 'Candice Ng';
   static int heartRate = 73;
   static double temperature = 36.0;
@@ -11,8 +9,15 @@ class HomePage extends StatelessWidget {
   static int diasBP = 76;
   static double bloodGlucose = 8.7;
   static double o2Level = 98.2;
-  static bool isSelectedPills = false;
-  static bool isSelectedVitals = false;
+  
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isSelectedPills = false;
+  bool isSelectedVitals = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +53,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text('Hi, $patientName', 
+                    Text('Hi, ${HomePage.patientName}', 
                       style: GoogleFonts.nunito(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
@@ -170,7 +175,9 @@ class HomePage extends StatelessWidget {
                                   Checkbox(
                                     value: isSelectedPills, 
                                     onChanged: (value) {
-                                      isSelectedPills = value!;
+                                      setState(() {
+                                        isSelectedPills = value!;
+                                      });
                                     }
                                   ),
                                 ],
@@ -227,7 +234,9 @@ class HomePage extends StatelessWidget {
                                   Checkbox(
                                     value: isSelectedVitals, 
                                     onChanged: (value) {
-                                      isSelectedVitals = value!;
+                                      setState(() {
+                                        isSelectedVitals = value!;
+                                      });
                                     }
                                   ),
                                 ],
@@ -290,7 +299,7 @@ class HomePage extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            '$heartRate bpm',
+                                            '${HomePage.heartRate} bpm',
                                             style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 12,
@@ -339,7 +348,7 @@ class HomePage extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            '$temperature °C',
+                                            '${HomePage.temperature} °C',
                                             style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 12,
@@ -376,7 +385,7 @@ class HomePage extends StatelessWidget {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Icon(Icons.device_thermostat, color: Colors.white, size: 20,),
+                                          Icon(Icons.bloodtype_sharp, color: Colors.white, size: 20,),
                                           SizedBox(height: 10,),
                                           Text('Blood Pressure', 
                                             style: TextStyle(
@@ -388,7 +397,7 @@ class HomePage extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            '$sysBP/$diasBP mmHg',
+                                            '${HomePage.sysBP}/${HomePage.diasBP} mmHg',
                                             style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 12,
@@ -425,7 +434,7 @@ class HomePage extends StatelessWidget {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Icon(Icons.device_thermostat, color: Colors.white, size: 20,),
+                                          Icon(Icons.bloodtype_sharp, color: Colors.white, size: 20,),
                                           SizedBox(height: 10,),
                                           Text('Blood Glucose', 
                                             style: TextStyle(
@@ -437,7 +446,7 @@ class HomePage extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            '$bloodGlucose mmol/L',
+                                            '${HomePage.bloodGlucose} mmol/L',
                                             style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 12,
@@ -474,7 +483,7 @@ class HomePage extends StatelessWidget {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Icon(Icons.device_thermostat, color: Colors.white, size: 20,),
+                                          Icon(Icons.air_sharp, color: Colors.white, size: 20,),
                                           SizedBox(height: 10,),
                                           Text('Oxygen Level', 
                                             style: TextStyle(
@@ -486,7 +495,7 @@ class HomePage extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            '$o2Level %',
+                                            '${HomePage.o2Level} %',
                                             style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 12,
@@ -516,11 +525,77 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 106,
-                      width: 328,
+                      width: 370,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('My Appointments'),
+                          Text('My Appointments', 
+                            style: GoogleFonts.nunito(
+                              color: Color(0xFF2F3061),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Container(
+                            width: 370,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF0F7EE),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Container(
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF6290C3),
+                                      borderRadius: BorderRadius.circular(7),
+                                    ),
+                                    child: Icon(Icons.person_add_alt, 
+                                      color: Color(0xFF2F3061), 
+                                      size: 30,
+                                    ),
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Nurse Lin will visit you today!',
+                                      style: TextStyle(
+                                        color: Color(0xFF2F3061),
+                                        fontSize: 15,
+                                        fontFamily: 'Nunito',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Regular check- in ',
+                                      style: TextStyle(
+                                        color: Color(0xFF2F3061),
+                                        fontSize: 12,
+                                        fontFamily: 'Nunito',
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 40),
+                                Text(
+                                  '4 Feb\n2pm',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF2F3061),
+                                    fontSize: 15,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
