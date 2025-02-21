@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
 
-class ChatPage extends StatelessWidget {
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+
+import 'dart:convert';
+import 'dart:math';
+
+class ChatPage extends StatefulWidget {
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  final List<types.Message> _messages = [];
+  final _user = const types.User(id: '82091008-a484-4a89-ae75-a22bf8d6f3ac');
+
+  String randomString() {
+    final random = Random.secure();
+    final values = List<int>.generate(16, (i) => random.nextInt(255));
+    return base64UrlEncode(values);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/Chat_Background.png'),
+            image: AssetImage('assets/images/Chat_Background.png'), 
             fit: BoxFit.cover,
           ),
         ),
+        height: double.infinity,
         child: Column(
           children: [
             Container(
@@ -30,57 +50,13 @@ class ChatPage extends StatelessWidget {
               )
             ),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [],
+              child: Chat(
+                messages: _messages,
+                onSendPressed: _handleSendPressed,
+                user: _user,
+                theme: DefaultChatTheme(
+                  backgroundColor: Colors.transparent,
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 15),
-              child: Container(
-                height: 50,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xFFF0F7EE),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                      child: Icon(Icons.add, color: Color(0xFF2F3061), size: 35,),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        onSubmitted: (value) {
-                          handleInput(value);
-                        },
-                        style: TextStyle(
-                            color: Color(0xFF2F3061),
-                            fontSize: 20,
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        decoration: InputDecoration(
-                          hintText: 'How can I help you today?',
-                          hintStyle: TextStyle(
-                            color: Color(0xFF2F3061),
-                            fontSize: 20,
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.w400,
-                          ),
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8), 
-                      child: Icon(Icons.mic, color: Color(0xFF2F3061), size: 28,),
-                    ),
-                  ],
-                )
               ),
             ),
           ],
@@ -88,9 +64,17 @@ class ChatPage extends StatelessWidget {
       ),
     );
   }
-  
-  // TODO implement function for sending input
-  void handleInput(String value) {
-    print(value);
+
+  void _handleSendPressed(types.PartialText message) {
+    final textMessage = types.TextMessage(
+      author: _user,
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      id: randomString(),
+      text: message.text,
+    );
+
+    setState(() {
+      _messages.insert(0, textMessage);
+    });
   }
 }
