@@ -6,6 +6,8 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:fyp_project/utilities/Request.dart';
+
 class ChatPage extends StatefulWidget {
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -75,6 +77,18 @@ class _ChatPageState extends State<ChatPage> {
 
     setState(() {
       _messages.insert(0, textMessage);
+    });
+
+    Request request = Request({'query' : message.text}, 'new');
+    request.sendPostRequest().then((response) {
+      final chatbotResponse = types.TextMessage(
+        author: types.User(id: 'chatbot'),
+        id: randomString(), 
+        text: response.getResponseContent('response')
+      );
+      setState(() {
+        _messages.insert(0, chatbotResponse);
+      });
     });
   }
 }
