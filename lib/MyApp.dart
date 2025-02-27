@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'LandingPage.dart';
 import 'MyAppState.dart';
+import 'package:calendar_view/calendar_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,12 +11,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
-      child: MaterialApp(
-        title: 'MediHeal',
-        theme: ThemeData(
-          useMaterial3: true,
+      child: CalendarControllerProvider(
+        controller: EventController(),
+        child: MaterialApp(
+          title: 'MediHeal',
+          theme: ThemeData(
+            useMaterial3: true,
+          ),
+          home: LandingPage(),
         ),
-        home: LandingPage(),
       ),
     );
   }
