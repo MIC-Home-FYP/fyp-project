@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "254147802354",
+    "project_id": "mediheal-fyp-project",
+    "storage_bucket": "mediheal-fyp-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254147802354:android:465ee4e6f56a8a4a294c6b",
+        "android_client_info": {
+          "package_name": "com.example.fyp_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADYCZjROZwz_5kSZMQSmVhv_68kIAjEE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
