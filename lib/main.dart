@@ -9,22 +9,33 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 // FlutterFire's Firebase Cloud Messaging plugin
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 import 'package:rxdart/rxdart.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 // used to pass messages from event handler to the UI
 final _messageStreamController = BehaviorSubject<RemoteMessage>();
 
 // define background message handler
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
- await Firebase.initializeApp();
+  await Firebase.initializeApp();
 
- if (kDebugMode) {
-   print("Handling a background message: ${message.messageId}");
-   print('Message data: ${message.data}');
-   print('Message notification: ${message.notification?.title}');
-   print('Message notification: ${message.notification?.body}');
- }
+  const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+    'high_importance_channel', 
+    'High Importance Notifications',
+    importance: Importance.high,
+    priority: Priority.high,
+  );
+
+  const NotificationDetails notificationDetails =
+      NotificationDetails(android: androidDetails);
+  
+  await FlutterLocalNotificationsPlugin().show(message.messageId.hashCode, message.notification?.title ?? "No Title", message.notification?.body ?? "No Body", notificationDetails);
+  if (kDebugMode) {
+    print("Handling a background message: ${message.messageId}");
+    print('Message data: ${message.data}');
+    print('Message notification: ${message.notification?.title}');
+    print('Message notification: ${message.notification?.body}');
+  }
 }
 
 Future<void> main() async {
