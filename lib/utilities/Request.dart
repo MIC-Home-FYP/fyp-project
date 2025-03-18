@@ -12,7 +12,7 @@ class Request {
 
   Future<Request> sendPostRequest() async {
     http.Response response = await http.post(
-      Uri.parse('http://10.0.2.2:8000/$endpoint'),
+      Uri.parse('http://192.168.0.155:8000/$endpoint'),
       headers: <String, String> {
       'Content-Type': 'application/json; charset=UTF-8',
       },
