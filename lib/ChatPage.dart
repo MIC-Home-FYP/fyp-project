@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
@@ -43,7 +46,7 @@ class _ChatPageState extends State<ChatPage> {
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 13),
                 child: Row(
                   children: [
-                    Image.asset('assets/images/Robot_Icon.png', width: 35, height: 35,),
+                    Icon(CupertinoIcons.sparkles, size: 35, color: Color(0xFF2F3061),),
                     SizedBox(width: 280),
                     Icon(Icons.history_sharp, size: 35, color: Color(0xFF2F3061),),
                     Icon(Icons.bookmark_add_outlined, size: 35, color: Color(0xFF2F3061),),
