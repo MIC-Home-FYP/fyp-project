@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:cupertino_icons/cupertino_icons.dart';
 
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:fyp_project/main.dart';
 
 import 'dart:convert';
 import 'dart:math';
@@ -20,6 +18,32 @@ class _ChatPageState extends State<ChatPage> {
   static List<types.Message> _messages = [];
   final _user = const types.User(id: '82091008-a484-4a89-ae75-a22bf8d6f3ac');
 
+  @override
+  void initState() {
+    super.initState();
+    // Listen to the shared stream.
+    if (messageStreamController != null) {
+      print("Listening to message stream");
+      messageStreamController.stream.listen((message) {
+        // Assuming the notification payload contains a key "customData"
+        final data = message.data['query'];
+        if (data != null) {
+          print("Sending message to chatbot");
+          Request request = Request({'query': data}, 'new');
+          request.sendPostRequest().then((response) {
+            final chatbotResponse = types.TextMessage(
+                author: types.User(id: 'chatbot'),
+                id: randomString(),
+                text: response.getResponseContent('response'));
+            setState(() {
+              _messages.insert(0, chatbotResponse);
+            });
+          });
+        }
+      });
+    }
+  }
+
   String randomString() {
     final random = Random.secure();
     final values = List<int>.generate(16, (i) => random.nextInt(255));
@@ -32,7 +56,7 @@ class _ChatPageState extends State<ChatPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/Chat_Background.png'), 
+            image: AssetImage('assets/images/Chat_Background.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -40,20 +64,34 @@ class _ChatPageState extends State<ChatPage> {
         child: Column(
           children: [
             Container(
-              height: 80,
-              color: Color(0xFFD9D9D9),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 13),
-                child: Row(
-                  children: [
-                    Icon(CupertinoIcons.sparkles, size: 35, color: Color(0xFF2F3061),),
-                    SizedBox(width: 280),
-                    Icon(Icons.history_sharp, size: 35, color: Color(0xFF2F3061),),
-                    Icon(Icons.bookmark_add_outlined, size: 35, color: Color(0xFF2F3061),),
-                  ],
-                ),
-              )
-            ),
+                height: 80,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 13),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Chat with MediHeal',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Nunito',
+                        ),
+                      ),
+                      Spacer(),
+                      Icon(
+                        Icons.history_sharp,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      Icon(
+                        Icons.bookmark_add_outlined,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                )),
             Expanded(
               child: Chat(
                 messages: _messages,
@@ -82,13 +120,12 @@ class _ChatPageState extends State<ChatPage> {
       _messages.insert(0, textMessage);
     });
 
-    Request request = Request({'query' : message.text}, 'new');
+    Request request = Request({'query': message.text}, 'new');
     request.sendPostRequest().then((response) {
       final chatbotResponse = types.TextMessage(
-        author: types.User(id: 'chatbot'),
-        id: randomString(), 
-        text: response.getResponseContent('response')
-      );
+          author: types.User(id: 'chatbot'),
+          id: randomString(),
+          text: response.getResponseContent('response'));
       setState(() {
         _messages.insert(0, chatbotResponse);
       });

@@ -118,14 +118,14 @@ class _PillsPageState extends State<PillsPage> {
               color: Color(0xFF6290C3),
             ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(30, 20, 30, 5),
+              padding: const EdgeInsets.all(15),
               child: Text(
                 'Pills Schedule ',
                 style: TextStyle(
                   color: Color(0xFFFFFCFC),
                   fontSize: 30,
                   fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),

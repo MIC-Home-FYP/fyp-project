@@ -102,12 +102,12 @@ class _HomePageState extends State<HomePage> {
                                 SizedBox(width: 5),
                                 Text('Your reminders for today', 
                                   style: GoogleFonts.nunito(
-                                    fontSize: 24,
+                                    fontSize: 18,
                                     color: Color(0xFF2F3061),
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                SizedBox(width: 11),
+                                Spacer(),
                                 GestureDetector(
                                   onTap: () => {
                                     //TODO: find a way to switch pages without removing the nav bar
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Container(
-                                    width: 220,
+                                    width: 180,
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                                         Text('Ibuprofen Before Breakfast 08:00',
                                           style: GoogleFonts.nunito(
                                             color: Color(0xFF2F3061),
-                                            fontSize: 12,
+                                            fontSize: 11,
                                             fontStyle: FontStyle.italic,
                                             fontWeight: FontWeight.w300,
                                           ),
@@ -172,6 +172,7 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     ),
                                   ),
+                                  Spacer(),
                                   Checkbox(
                                     value: isSelectedPills, 
                                     onChanged: (value) {
@@ -209,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Container(
-                                    width: 220,
+                                    width: 180,
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -223,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                                         Text('Upload temperature 09:00',
                                           style: GoogleFonts.nunito(
                                             color: Color(0xFF2F3061),
-                                            fontSize: 12,
+                                            fontSize: 11,
                                             fontStyle: FontStyle.italic,
                                             fontWeight: FontWeight.w300,
                                           ),
@@ -231,6 +232,7 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     ),
                                   ),
+                                  Spacer(),
                                   Checkbox(
                                     value: isSelectedVitals, 
                                     onChanged: (value) {
@@ -582,7 +584,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 40),
+                                Spacer(),
                                 Text(
                                   '4 Feb\n2pm',
                                   textAlign: TextAlign.center,
@@ -592,13 +594,15 @@ class _HomePageState extends State<HomePage> {
                                     fontFamily: 'Nunito',
                                     fontWeight: FontWeight.w700,
                                   ),
-                                )
+                                ),
+                                SizedBox(width: 15,)
                               ],
                             ),
                           ),
                         ],
                       ),
                     ),
+                    SizedBox(height: 15),
                   ],
                 ),
               ),

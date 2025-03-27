@@ -6,13 +6,22 @@ import 'package:fyp_project/ChatPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PageNavigator extends StatefulWidget {
+  final int initialIndex;
+  const PageNavigator({Key? key, this.initialIndex = 0}) : super(key: key);
 
   @override
   State<PageNavigator> createState() => _PageNavigatorState();
 }
 
 class _PageNavigatorState extends State<PageNavigator> {
-  int currentPageIndex = 0;
+  late int currentPageIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    // Use the initial index passed from the constructor.
+    currentPageIndex = widget.initialIndex;
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'MyApp.dart';
+import 'package:provider/provider.dart';
 
 // core Flutter primitives
 import 'package:flutter/foundation.dart';
@@ -13,7 +14,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 // used to pass messages from event handler to the UI
-final _messageStreamController = BehaviorSubject<RemoteMessage>();
+final messageStreamController = BehaviorSubject<RemoteMessage>();
 
 // define background message handler
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -36,12 +37,38 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     print('Message notification: ${message.notification?.title}');
     print('Message notification: ${message.notification?.body}');
   }
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  // Push the message payload to the stream.
+  messageStreamController.sink.add(message);
+});
 }
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // Initialization settings for Android (and iOS if needed)
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+  );
+
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onDidReceiveNotificationResponse: (NotificationResponse response) async {
+      final String? payload = response.payload;
+      if (payload != null) {
+        // Navigate using your global navigator key
+        MyApp.navigatorKey.currentState?.pushNamed('chat');
+      }
+    },
   );
 
   // Init firebase messaging instance
@@ -77,11 +104,14 @@ Future<void> main() async {
       print('Message notification: ${message.notification?.body}');
     }
 
-    _messageStreamController.sink.add(message);
+    messageStreamController.sink.add(message);
   });
 
   // Set up background message handler
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  runApp(MyApp());
+  runApp(
+    Provider<BehaviorSubject<RemoteMessage>>.value(
+      value: messageStreamController,
+      child: const MyApp(),));
 }
