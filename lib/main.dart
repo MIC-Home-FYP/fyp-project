@@ -39,6 +39,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   }
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Handling a background message: ${message.messageId}');
   // Push the message payload to the stream.
   messageStreamController.sink.add(message);
 });
@@ -110,6 +111,7 @@ Future<void> main() async {
   // Set up background message handler
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+  Provider.debugCheckInvalidValueType = null;
   runApp(
     Provider<BehaviorSubject<RemoteMessage>>.value(
       value: messageStreamController,
