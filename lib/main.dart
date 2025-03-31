@@ -37,12 +37,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     print('Message notification: ${message.notification?.title}');
     print('Message notification: ${message.notification?.body}');
   }
-
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Handling a background message: ${message.messageId}');
   // Push the message payload to the stream.
   messageStreamController.sink.add(message);
-});
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();

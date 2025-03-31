@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:rxdart/rxdart.dart';
+import 'main.dart';
 
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:fyp_project/main.dart';
 
 import 'dart:convert';
 import 'dart:math';
@@ -17,31 +22,49 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   static List<types.Message> _messages = [];
   final _user = const types.User(id: '82091008-a484-4a89-ae75-a22bf8d6f3ac');
+  StreamSubscription<RemoteMessage>? _subscription;
 
   @override
-  void initState() {
-    super.initState();
-    // Listen to the shared stream.
-    if (messageStreamController != null) {
-      print("Listening to message stream");
-      messageStreamController.stream.listen((message) {
-        // Assuming the notification payload contains a key "customData"
-        final data = message.data['query'];
-        if (data != null) {
-          print("Sending message to chatbot");
-          Request request = Request({'query': data}, 'new');
-          request.sendPostRequest().then((response) {
-            final chatbotResponse = types.TextMessage(
-                author: types.User(id: 'chatbot'),
-                id: randomString(),
-                text: response.getResponseContent('response'));
-            setState(() {
-              _messages.insert(0, chatbotResponse);
-            });
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // Ensure we don't add multiple listeners
+    _subscription?.cancel();
+    
+    final messageStream = Provider.of<BehaviorSubject<RemoteMessage>>(context);
+
+    _subscription = messageStream.stream.listen((message) {
+      print("Received message in ChatPage: ${message.notification?.title}");
+
+      final data = message.data['query'];
+      if (data != null) {
+        print("Sending message to chatbot");
+        Request request = Request({'query': data}, 'new');
+        request.sendPostRequest().then((response) {
+          final chatbotResponse = types.TextMessage(
+            author: types.User(id: 'chatbot'),
+            id: randomString(),
+            text: response.getResponseContent('response'),
+          );
+          setState(() {
+            _messages.insert(0, chatbotResponse);
           });
-        }
-      });
+        });
+      }
+    });
+
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+    if (message != null) {
+      print("App opened via background notification: ${message.notification?.title}");
+      messageStreamController.sink.add(message);
     }
+  });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel(); // Clean up the stream subscription
+    super.dispose();
   }
 
   String randomString() {
