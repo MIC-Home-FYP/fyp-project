@@ -440,19 +440,6 @@ class VitalsPage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    'Good',
-                                    style: TextStyle(
-                                      color: Color(0xFFFFFCFC),
-                                      fontSize: 20,
-                                      fontStyle: FontStyle.italic,
-                                      fontFamily: 'Nunito',
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                           ),

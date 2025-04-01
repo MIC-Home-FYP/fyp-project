@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'MyApp.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +23,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 
   const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-    'high_importance_channel', 
+    'high_importance_channel',
     'High Importance Notifications',
     importance: Importance.high,
     priority: Priority.high,
@@ -29,8 +31,14 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
   const NotificationDetails notificationDetails =
       NotificationDetails(android: androidDetails);
-  
-  await FlutterLocalNotificationsPlugin().show(message.messageId.hashCode, message.notification?.title ?? "No Title", message.notification?.body ?? "No Body", notificationDetails);
+
+  await flutterLocalNotificationsPlugin.show(
+    message.messageId.hashCode,
+    message.notification?.title ?? "No Title",
+    message.notification?.body ?? "No Body",
+    notificationDetails,
+    payload: jsonEncode(message.data),
+  );
   if (kDebugMode) {
     print("Handling a background message: ${message.messageId}");
     print('Message data: ${message.data}');
@@ -41,7 +49,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   messageStreamController.sink.add(message);
 }
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,9 +69,25 @@ Future<void> main() async {
   await flutterLocalNotificationsPlugin.initialize(
     initializationSettings,
     onDidReceiveNotificationResponse: (NotificationResponse response) async {
-      final String? payload = response.payload;
+      final String payload = response.payload!;
+      print("Notification tapped with payload: $payload");
       if (payload != null) {
-        // Navigate using your global navigator key
+        try {
+          final Map<String, dynamic> data = jsonDecode(payload);
+          print("Decoded payload: $data");
+          // You can now use 'data' to build a RemoteMessage or any other logic you need.
+          RemoteMessage message = RemoteMessage(
+            data: data,
+            notification: RemoteNotification(
+              title: "title",
+              body: "body",
+            ),
+          );
+
+          messageStreamController.sink.add(message);
+        } catch (e) {
+          print("Error decoding payload: $e");
+        }
         MyApp.navigatorKey.currentState?.pushNamed('chat');
       }
     },
@@ -108,8 +133,8 @@ Future<void> main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   Provider.debugCheckInvalidValueType = null;
-  runApp(
-    Provider<BehaviorSubject<RemoteMessage>>.value(
-      value: messageStreamController,
-      child: const MyApp(),));
+  runApp(Provider<BehaviorSubject<RemoteMessage>>.value(
+    value: messageStreamController,
+    child: const MyApp(),
+  ));
 }
