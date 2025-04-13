@@ -152,7 +152,7 @@ class PatientSignup extends StatelessWidget {
                       SizedBox(height: 15),
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                        child: Text("Patient ID", 
+                        child: Text("Patient Name", 
                           style: GoogleFonts.nunito(
                             color: Colors.white, 
                             fontSize: 21,
